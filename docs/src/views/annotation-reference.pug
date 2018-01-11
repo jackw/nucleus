@@ -36,9 +36,9 @@ block content
     /** @color Solid black */
     $color: #000;
 
-  h2.SG-h2 Mixins
+  h2.SG-h2 Mixins and Functions
   p.SG-p.
-    For @mixin, the @markup annotation does not make much sense, so it becomes @example. Also, you should describe the parameters (and what they are meant for) with @param. Nucleus should automatically recognize if a mixin parameter is optional or not.
+    For @mixin and @function, the @markup annotation does not make much sense, so it becomes @example. Also, you should describe the parameters (and what they are meant for) with @param. Nucleus should automatically recognize if a mixin parameter is optional or not.
   code.code.language-nucleus(data-d-code-preview).
     /**
      * Put rounded borders around the element
@@ -55,7 +55,21 @@ block content
     @mixin brc($radius, $color = '#333') {
       /* ... */
     }
-
+  code.code.language-nucleus(data-d-code-preview).
+    /**
+     * Convert pixel values to ems.
+     *
+     * @section Style Functions
+     * @param $pixel-value The value to convert to ems
+     * @param $context The context to calculate ems against
+     *
+     * @example
+     *  @include px-to-em(30px);
+     *  @include px-to-em(30px, 15px);
+     */
+    @function px-to-em($pixel-value, $context: $base-font-size) {
+      /* ... */
+    }
   h2.SG-h2 Atoms
   p.SG-p.
     Atoms are the very basic elements of the stylesheet. Imagine every single-class element or selector rules as an atom. Examples are buttons, links, headlines, inputs ... you get it, right?
