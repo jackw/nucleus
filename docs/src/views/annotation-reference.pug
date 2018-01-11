@@ -52,7 +52,7 @@ block content
      *  @include brc(3px);
      *  @include brc(3px, $color--red);
      */
-    @mixin brc($radius, $color = '#333') {
+    @mixin brc($radius, $color: #333) {
       /* ... */
     }
   code.code.language-nucleus(data-d-code-preview).
@@ -64,8 +64,8 @@ block content
      * @param $context The context to calculate ems against
      *
      * @example
-     *  @include px-to-em(30px);
-     *  @include px-to-em(30px, 15px);
+     *  px-to-em(30px);
+     *  px-to-em(30px, 15px);
      */
     @function px-to-em($pixel-value, $context: $base-font-size) {
       /* ... */
