@@ -15,12 +15,14 @@ var Verbose = require('./Verbose');
 var Nuclide = require('./entities/Nuclide');
 var Color = require('./entities/Color');
 var Mixin = require('./entities/Mixin');
+var SassFunction = require('./entities/Function');
 var Atom = require('./entities/Atom');
 var Icon = require('./entities/Icon');
 var Molecule = require('./entities/Molecule');
 var Structure = require('./entities/Structure');
 
 var Dot = require('dot-object');
+var _ = require('lodash');
 
 var Transform = {};
 
@@ -59,9 +61,27 @@ Transform.forView = function(styles) {
       data: section
     }, viewData);
   }
-
-  return viewData;
+  return sortObjectAlphabetically(viewData);
 };
+
+function sortObjectAlphabetically(object){
+  var sortedObj = {},
+      keys = _.keys(object);
+
+  keys = _.sortBy(keys, function(key){
+      return key;
+  });
+
+  _.each(keys, function(key) {
+      if(typeof object[key] == 'object' && !(object[key] instanceof Array)){
+          sortedObj[key] = sortObjectAlphabetically(object[key]);
+      } else {
+          sortedObj[key] = object[key];
+      }
+  });
+
+  return sortedObj;
+}
 
 /**
  * Returns the type of the style.
@@ -73,7 +93,7 @@ Transform.getStyleType = function(style) {
   // Loop through the available type annotations and check if the style
   // has one of these. If there's more than one, show a warning.
   var typeAnnotations = [
-    'color', 'mixin', 'nuclide',
+    'color', 'mixin', 'function', 'nuclide',
     'atom', 'icon', 'molecule', 'structure'
   ];
 
@@ -122,6 +142,8 @@ Transform.createEntity = function(style) {
       return new Color(style);
     case 'mixin':
       return new Mixin(style);
+    case 'function':
+      return new SassFunction(style);
     case 'atom':
       return new Atom(style);
     case 'icon':

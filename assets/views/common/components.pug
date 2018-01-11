@@ -13,6 +13,7 @@ include ../entities/nuclides.pug
 include ../entities/colors.pug
 include ../entities/icons.pug
 include ../entities/mixins.pug
+include ../entities/functions.pug
 
 
 
@@ -32,6 +33,10 @@ mixin components(components)
     //- Mixin
     if component.type === 'mixin'
       +mixin(component)
+
+    //- Function
+    if component.type === 'function'
+      +sassFunction(component)
 
     //- Icon
     if component.type === 'icon'
