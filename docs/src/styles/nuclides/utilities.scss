@@ -1,0 +1,13 @@
+/**
+ * Fetch a value from nested maps
+ * @section Utilities
+ * @function Map Nested Get
+ * @param $map The haystack to search.
+ * @param $keys... A list of keys to traverse to the nested value
+ * @example
+ *  map-nested-get($map: $nested-map, $keys: $list-of-keys);
+ */
+
+@function map-nested-get($map, $keys...) {
+  /* placeholder */
+}
