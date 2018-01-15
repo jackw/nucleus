@@ -20,7 +20,7 @@ var Color = function(raw) {
 
   // Set color-specific entity properties
   this.type = "Color";
-  this.fillable = ['color', 'section', 'description', 'deprecated'];
+  this.fillable = ['color', 'section', 'description', 'deprecated', 'sassgenerated'];
 
   // Validate the raw input data for common mistakes
   if (!this.validate()) return {};

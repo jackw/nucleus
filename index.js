@@ -21,6 +21,7 @@ var Substitute = require('./src/Substitute');
 var SearchIndex = require('./src/SearchIndex');
 
 var jade = require('pug');
+var _ = require('lodash');
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,13 @@ for(var f in config.files) {
   Verbose.spin('Crawling ' + file);
   var style = Crawler.processFile(file);
   styles = styles.concat(style);
+}
+
+if (config.generatedSassComments) {
+  var file = config.generatedSassComments;
+  var generatedStyles = Crawler.processFile(file);
+  var filteredGeneratedStyles = _.filter(generatedStyles, 'annotations.sassgenerated')
+  styles = styles.concat(filteredGeneratedStyles);
 }
 
 /*
